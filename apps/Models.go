@@ -3,7 +3,6 @@ package apps
 import (
 	"database/sql"
 	"net/http"
-	"github.com/heroku/go-getting-started/apps"
 	"log"
 	"encoding/json"
 )
@@ -11,9 +10,9 @@ import (
 func ProductHandler(db *sql.DB) http.HandlerFunc{
 	function := func(writer http.ResponseWriter, request *http.Request){
 
-		var products apps.Products
-		var arr_products []apps.Products
-		var responseProduct apps.ResponseProduct
+		var products Products
+		var arr_products [] Products
+		var responseProduct  ResponseProduct
 
 		rows, err := db.Query("SELECT sku,product_name,stocks from products ORDER BY sku DESC")
 		if(err != nil){
