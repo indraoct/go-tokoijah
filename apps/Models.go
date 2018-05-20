@@ -11,12 +11,8 @@ import (
 func ProductHandler(db *sql.DB) http.HandlerFunc{
 	function := func(writer http.ResponseWriter, request *http.Request){
 
-
-		//Products
 		var products apps.Products
 		var arr_products []apps.Products
-
-		//response get product user
 		var responseProduct apps.ResponseProduct
 
 		rows, err := db.Query("SELECT sku,product_name,stocks from products ORDER BY sku DESC")

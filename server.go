@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/indraoct/go-tokoijah/apps"
+	"time"
 )
 
 
@@ -16,28 +17,22 @@ func initDb() *sql.DB {
 	if(err != nil){
 		log.Fatal(err)
 	}
-	//set max idle conns
-	db.SetMaxIdleConns(20)
-	//setmaxopenconns
-	db.SetMaxOpenConns(20)
+
+	db.SetMaxIdleConns(1)
+
+	db.SetMaxOpenConns(5)
+
+	db.SetConnMaxLifetime(time.Minute*5)
 
 	return db
 
 }
 
-/**
- * Main Function
- */
+
 func main(){
 
-	/**
-	 * Initiate DB
-	 */
 	db := initDb()
 
-	/**
-	 * Router
-	 */
 	router := mux.NewRouter()
 	router.HandleFunc("/getproducts",apps.ProductHandler(db)).Methods("GET")
 	http.Handle("/",router)
