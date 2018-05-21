@@ -34,7 +34,7 @@ func main(){
 	db := initDb()
 
 	router := mux.NewRouter()
-	router.HandleFunc("/getproducts",apps.ProductHandler(db)).Methods("GET")
+	router.HandleFunc("/getproducts",apps.GetProductHandler(db)).Methods("GET")
 	http.Handle("/",router)
 	log.Fatal(http.ListenAndServe(":8000",router))
 
