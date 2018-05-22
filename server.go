@@ -18,7 +18,7 @@ func initDb() *sql.DB {
 		log.Fatal(err)
 	}
 
-	db.SetMaxIdleConns(1)
+	db.SetMaxIdleConns(0)
 
 	db.SetMaxOpenConns(5)
 
@@ -34,7 +34,8 @@ func main(){
 	db := initDb()
 
 	router := mux.NewRouter()
-	router.HandleFunc("/getproducts",apps.GetProducthandler(db)).Methods("GET")
+	router.HandleFunc("/getproducts",apps.GetProductshandler(db)).Methods("GET")
+	router.HandleFunc("/getproduct/{id}",apps.GetProducthandler(db)).Methods("GET")
 	http.Handle("/",router)
 	log.Fatal(http.ListenAndServe(":7777",router))
 
