@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/labstack/gommon/log"
+	"log"
 	"net/http"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
