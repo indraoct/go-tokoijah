@@ -35,7 +35,7 @@ func main(){
 
 	router := mux.NewRouter()
 	router.HandleFunc("/getproducts",apps.GetProductshandler(db)).Methods("GET")
-	router.HandleFunc("/getproduct/{id}",apps.GetProducthandler(db)).Methods("GET")
+	router.HandleFunc("/getproduct/{sku:[A-Za-z0-9-_/.]+}",apps.GetProducthandler(db)).Methods("GET")
 	http.Handle("/",router)
 	log.Fatal(http.ListenAndServe(":7777",router))
 
