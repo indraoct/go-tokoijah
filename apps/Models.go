@@ -2,23 +2,20 @@ package apps
 
 import (
 	"database/sql"
-	"net/http"
 	"log"
-	"encoding/json"
 )
 
-func GetProductHandler(db *sql.DB) http.HandlerFunc{
-	function := func(writer http.ResponseWriter, request *http.Request){
-
+func GetProducts(db *sql.DB,filter_sku string) []Products{
 		var products Products
 		var arr_products [] Products
-		var responseProduct  ResponseProduct
-		filter_sku := request.FormValue("sku")
 
 		if(filter_sku != ""){
-			db.QueryRow("SELECT sku,product_name,stocks from products WHERE sku=?",filter_sku).Scan(&products.Sku,&products.Product_name,&products.Stocks)
-                        arr_products = append(arr_products,products)
+			err:= db.QueryRow("SELECT sku,product_name,stocks from products WHERE sku=?",filter_sku).Scan(&products.Sku,&products.Product_name,&products.Stocks)
+			if err != nil {
+				log.Fatal(err)
+			}
 
+			arr_products = append(arr_products,products)
 		}else {
 
 			rows, err := db.Query("SELECT sku,product_name,stocks from products ORDER BY sku DESC")
@@ -35,17 +32,6 @@ func GetProductHandler(db *sql.DB) http.HandlerFunc{
 			}
 		}
 
-		responseProduct.Data = arr_products
-		responseProduct.Status = 1
-		responseProduct.Message = "Success"
+	return arr_products
 
-
-		writer.Header().Set("Content-Type", "application/json")
-		writer.WriteHeader(http.StatusOK)
-
-		json.NewEncoder(writer).Encode(responseProduct)
-
-	}
-
-	return http.HandlerFunc(function)
 }
