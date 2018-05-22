@@ -8,12 +8,23 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/indraoct/go-tokoijah/apps"
 	"time"
+	"github.com/BurntSushi/toml"
+	"fmt"
 )
 
 
 func initDb() *sql.DB {
 
-	db, err := sql.Open("mysql", "root:blink182@/tokoijah")
+	var conf apps.Config
+	if _, err := toml.DecodeFile("./config.toml", &conf); err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Printf("%#v\n", conf)
+
+	connString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", conf.Database.User, conf.Database.Password, conf.Database.Server, conf.Database.Port, conf.Database.Database)
+
+	db, err := sql.Open("mysql", connString)
 	if(err != nil){
 		log.Fatal(err)
 	}

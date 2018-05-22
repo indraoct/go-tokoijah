@@ -5,6 +5,25 @@ package apps
  * Group Of struct
  */
 
+//Config Struct
+type Config struct {
+	Output Output
+	Database Database
+}
+
+type Database struct {
+	Server string
+	Port string
+	Database string
+	User string
+	Password string
+}
+
+type Output struct {
+	Directory string
+	Format string
+}
+
 //Products struct
 type Products struct {
 	Sku          string    `gorm:"not null" form:"sku" json:"sku"`

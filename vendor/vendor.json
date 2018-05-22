@@ -7,6 +7,12 @@
 			"revision": ""
 		},
 		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "a368813c5e648fee92e5f6c30e3944ff9d5e8895",
+			"revisionTime": "2017-06-26T11:06:00Z"
+		},
+		{
 			"checksumSHA1": "IOvhb7QeZTt4cQENU7R4K/Ig19Q=",
 			"path": "github.com/go-sql-driver/mysql",
 			"revision": "92a288d2426bb79e058d61dc5009a67e0568c431",
