@@ -10,13 +10,13 @@ import (
 /**
  * Get rows data product
  */
-func GetProductshandler(db *sql.DB) http.HandlerFunc{
+func GetProducts(db *sql.DB) http.HandlerFunc{
 	function := func(writer http.ResponseWriter, request *http.Request){
 
 		var responseProduct  ResponseProduct
 		filter := make(map[string]string)
 
-		arr_products := GetProducts(db,filter)
+		arr_products := ProductsModel(db,filter)
 		responseProduct.Data = arr_products
 		responseProduct.Status = 1
 		responseProduct.Message = "Success"
@@ -35,7 +35,7 @@ func GetProductshandler(db *sql.DB) http.HandlerFunc{
  * Single Row Product SKU
  */
 
-func GetProducthandler(db *sql.DB) http.HandlerFunc{
+func GetProduct(db *sql.DB) http.HandlerFunc{
 	function := func(writer http.ResponseWriter,request *http.Request){
 
 		var responseProduct ResponseProduct
@@ -44,7 +44,7 @@ func GetProducthandler(db *sql.DB) http.HandlerFunc{
 		filter["sku"] = sku
 
 		if(sku != ""){
-			arr_products := GetProducts(db,filter)
+			arr_products := ProductsModel(db,filter)
 			responseProduct.Status = 1
 			responseProduct.Message = "Success"
 			responseProduct.Data = arr_products

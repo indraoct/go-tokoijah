@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func GetProducts(db *sql.DB,filter map[string]string) []Products{
+func ProductsModel(db *sql.DB,filter map[string]string) []Products{
 		var products Products
 		var arr_products [] Products
 
