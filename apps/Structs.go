@@ -12,6 +12,12 @@ type Products struct {
 	Stocks       int    `gorm:"not null" form:"stocks" json:"stocks"`
 }
 
+type ReturnDataProduct struct {
+	Data         []Products `form:"data" json:"data"`
+	Count        int        `form:"count" json:"count"`
+
+}
+
 
 //Stock_Ins
 type Stock_Ins struct {
@@ -98,6 +104,7 @@ type ResponseProduct struct {
 	Status    int        `form:"status" json:"status"`
 	Message   string     `form:"message" json:"message"`
 	Data      []Products `form:"data" json:"data"`
+	Count     int        `form:"count" json:"count"`
 }
 
 //Response Insert Product
